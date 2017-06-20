@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table id="example" class="table table-condensed table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </tfoot>
+</table>
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/datatable/media/css/jquery.dataTables.min.css" />
+}
+
+@section Scripts {
+    <script src="~/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                //"processing": true,
+                //"serverSide": true,
+                "deferRender": true,
+                "pageLength": 25,
+                //"scroller": true,
+                //"scrollX": true,
+                "ajax": "api/zoho/account",
+                //"ajax": function (data, callback, settings) {
+                //    var param = {};
+                //    param.limit = data.pageLength;
+                //    param.start = data.start;
+                //    param.page = 10;
+
+                //    $.ajax({
+                //        type: "GET",
+                //        url: "api/zoho/account",
+                //        dataType: "json",
+                //        success: function (result) {
+
+
+                //        }
+                //    });
+
+                //},
+                "columns": [
+                    { "data": "accountId" },
+                    { "data": "accountName" },
+                    { "data": "email" },
+                    { "data": "phone" },
+                ],
+                "columnDefs": [
+                    { "targets": [1, 2, 3], "orderable": true },
+                    { "targets": [1, 2, 3], "searchable": true },
+                    { targets: '_all', "orderable": false, "searchable": false }
+                ]
+
+            });
+        });
+    </script>
+}
